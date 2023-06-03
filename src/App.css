@@ -16,6 +16,10 @@ body,
   font-family: "Markazi Text", serif;
 }
 
+.container {
+  margin-right: 10px;
+}
+
 .button {
   background: #f4ce14;
   border-radius: 16px;
@@ -29,14 +33,7 @@ body,
 }
 
 .row {
-  width: 100%;
-}
-
-.row-center {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  /* width: 100%; */
 }
 
 .header li {
@@ -129,4 +126,128 @@ body,
 
 .menu-items .right-36 {
   margin-right: 36px;
+}
+
+.table-booking {
+  margin-left: 20px;
+}
+
+.table-booking h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+  color: #000000;
+}
+
+.table-booking p {
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #495e57;
+  margin-top: 14px;
+}
+
+.table-booking hr {
+  margin-top: 27px;
+  margin-bottom: 21px;
+  height: 0px;
+  border: 1px solid #eaeaea;
+  max-width: 305px;
+  margin-right: 34px;
+  margin-left: 0;
+}
+
+.table-booking form label {
+  display: block;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.reservation-field {
+  width: 317px;
+  height: 43px;
+  text-align: center;
+  margin-top: 10px;
+  font-family: "Karla";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  padding-right: 5px;
+}
+
+.reservation-field.occasion {
+  text-align: left;
+  padding-left: 5px;
+}
+
+.diner-count,
+.diner-count .flat-button {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 44px;
+  text-align: center;
+}
+
+.diner-count {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.form-submit {
+  padding: 13px 117px;
+  width: 304px;
+  height: 50px;
+}
+
+.form-submit.submitted {
+  background-color: #495e57;
+}
+
+form {
+  margin-bottom: 22px;
+}
+
+@media screen and (max-width: 375px) {
+  .reservation-field {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .row-center {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  /* .header img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  } */
+
+  .header .hamburger {
+    margin-left: 20px;
+    margin-right: 2rem;
+    height: 40px;
+  }
+
+  .header ul {
+    display: block;
+  }
+
+  .header li {
+    display: block;
+  }
 }
