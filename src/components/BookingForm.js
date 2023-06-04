@@ -23,7 +23,19 @@ export default function BookingForm(props) {
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
 
   const availableTimes = props.availableTimes;
-  // console.log("available times:", availableTimes);
+
+  const timesShownJSX = availableTimes.availableTimes.map((time, id) => (
+    <button
+      key={id}
+      className="button available-times"
+      onClick={() => {
+        setTime(time);
+      }}
+      type="button"
+    >
+      {time}
+    </button>
+  ));
 
   const bookedInfo = {
     date: "",
@@ -44,8 +56,8 @@ export default function BookingForm(props) {
 
   function dateChangeHandler(e) {
     setDate(e.target.value);
-    availableTimes.dispatch(date);
-    // console.log("available times:", availableTimes);
+    setTime("");
+    availableTimes.dispatch({ date: date });
   }
 
   function resetStates() {
@@ -92,23 +104,19 @@ export default function BookingForm(props) {
           value={date}
           onChange={dateChangeHandler}
         />
-
         <hr />
-
         <label htmlFor="reservation-time" className="row">
           Reservation time
         </label>
-        <input
-          type="time"
-          name="reservation-time"
-          id="reservation-time"
-          className="reservation-field"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-        />
+        <p>
+          Select from the following list of available times on the selected
+          date.
+        </p>
+        <div className="available-times-container" name="reservation-time">
+          {timesShownJSX}
+        </div>
 
         <hr />
-
         <label htmlFor="reservation-occasion" className="row">
           Occasion
         </label>
@@ -120,9 +128,7 @@ export default function BookingForm(props) {
           value={occasion}
           onChange={(e) => setOccasion(e.target.value)}
         />
-
         <hr />
-
         <label htmlFor="resevation-diners" className="row">
           Number of diners
         </label>
@@ -131,7 +137,6 @@ export default function BookingForm(props) {
           <span id="resevation-diners"> {dinerCount} </span>
           <FlatButton onClick={increaseDinerCount}>+</FlatButton>
         </div>
-
         <div className="form-submission">
           <button
             className={`form-submit button ${
