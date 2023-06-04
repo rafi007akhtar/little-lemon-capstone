@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FlatButton from "./common-components/FlatButton";
 
-function getTodaysDate() {
-  const date = new Date();
+function getFormattedDate(d) {
+  const date = new Date(d);
   let dd = date.getDate();
   if (dd < 10) {
     dd = "0" + dd;
@@ -16,19 +16,26 @@ function getTodaysDate() {
 }
 
 export default function BookingForm(props) {
-  const [date, setDate] = useState(getTodaysDate());
+  const [date, setDate] = useState(getFormattedDate(new Date()));
   const [time, setTime] = useState("");
   const [occasion, setOccasion] = useState("");
   const [dinerCount, setDinerCount] = useState(1);
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("formData");
+    };
+  }, []);
 
   const availableTimes = props.availableTimes;
-
   const timesShownJSX = availableTimes.availableTimes.map((time, id) => (
     <button
       key={id}
       className="button available-times"
       onClick={() => {
+        setError(false);
         setTime(time);
       }}
       type="button"
@@ -36,6 +43,8 @@ export default function BookingForm(props) {
       {time}
     </button>
   ));
+
+  const minDate = getFormattedDate(new Date());
 
   const bookedInfo = {
     date: "",
@@ -61,7 +70,7 @@ export default function BookingForm(props) {
   }
 
   function resetStates() {
-    setDate(getTodaysDate());
+    setDate(getFormattedDate(new Date()));
     setTime("");
     setOccasion("");
     setDinerCount(1);
@@ -69,7 +78,6 @@ export default function BookingForm(props) {
 
   function formSubmit(e) {
     e.preventDefault();
-    setFormIsSubmitted(true);
     bookedInfo.date = date;
     bookedInfo.time = time;
     bookedInfo.occasion = occasion;
@@ -79,11 +87,18 @@ export default function BookingForm(props) {
       bookedInfo
     );
     localStorage.setItem("formData", JSON.stringify(bookedInfo));
-    resetStates();
     props.submitForm(bookedInfo);
+    const submissionError = localStorage.getItem("submissionError");
+    if (submissionError) {
+      setError(submissionError);
+    } else {
+      resetStates();
+      setFormIsSubmitted(true);
+    }
   }
 
   function formChange() {
+    setError(null);
     setFormIsSubmitted(false);
   }
 
@@ -105,8 +120,12 @@ export default function BookingForm(props) {
           className="reservation-field"
           value={date}
           onChange={dateChangeHandler}
+          required
+          min={minDate}
         />
+
         <hr />
+
         <label htmlFor="reservation-time" className="row">
           Reservation time
         </label>
@@ -117,6 +136,11 @@ export default function BookingForm(props) {
         <div className="available-times-container" name="reservation-time">
           {timesShownJSX}
         </div>
+        {error && error === "time" && (
+          <p className="error">
+            Please select a reservation time from this list
+          </p>
+        )}
 
         <hr />
         <label htmlFor="reservation-occasion" className="row">
@@ -129,11 +153,13 @@ export default function BookingForm(props) {
           className="reservation-field occasion"
           value={occasion}
           onChange={(e) => setOccasion(e.target.value)}
+          required
         />
         <hr />
         <label htmlFor="resevation-diners" className="row">
           Number of diners
         </label>
+        <p>You need to select at least 1 and go upto a maximum of 4 diners.</p>
         <div className="diner-count">
           <FlatButton onClick={decreaseDinerCount}>-</FlatButton>
           <span id="resevation-diners"> {dinerCount} </span>

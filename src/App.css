@@ -180,6 +180,10 @@ body,
   color: #000000;
 }
 
+.table-booking .error {
+  color: firebrick;
+}
+
 .reservation-field {
   width: 317px;
   height: 43px;

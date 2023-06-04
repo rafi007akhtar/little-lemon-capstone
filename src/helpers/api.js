@@ -26,6 +26,14 @@ const fetchAPI = function (date) {
 };
 
 const submitAPI = function (formData) {
+  localStorage.removeItem("submissionError");
+  const keys = Object.keys(formData);
+  for (let key of keys) {
+    if (!formData[key]) {
+      localStorage.setItem("submissionError", key);
+      return false;
+    }
+  }
   return true;
 };
 
