@@ -4,15 +4,15 @@ import Main from "./components/Main";
 import Footer from "./components/Footer";
 import BookingForm from "./components/BookingForm";
 import { useReducer } from "react";
+import { fetchAPI } from "./helpers/api";
 
 function updateTimes(state, action) {
-  switch (action?.type) {
-  }
-  return state;
+  const times = fetchAPI(new Date(action.date));
+  return times;
 }
 
 function initializeTimes() {
-  return ["9PM"];
+  return fetchAPI(new Date());
 }
 
 function App() {
