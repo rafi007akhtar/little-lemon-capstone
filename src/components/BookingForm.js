@@ -15,12 +15,15 @@ function getTodaysDate() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export default function BookingForm() {
+export default function BookingForm(props) {
   const [date, setDate] = useState(getTodaysDate());
   const [time, setTime] = useState("");
   const [occasion, setOccasion] = useState("");
   const [dinerCount, setDinerCount] = useState(1);
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
+
+  const availableTimes = props.availableTimes;
+  // console.log("available times:", availableTimes);
 
   const bookedInfo = {
     date: "",
@@ -28,8 +31,6 @@ export default function BookingForm() {
     occasion: "",
     dinerCount: 0,
   };
-
-  // let formIsSubmitted = false;
 
   function decreaseDinerCount() {
     if (dinerCount <= 1) return;
@@ -41,6 +42,12 @@ export default function BookingForm() {
     setDinerCount((state) => state + 1);
   }
 
+  function dateChangeHandler(e) {
+    setDate(e.target.value);
+    availableTimes.dispatch(date);
+    // console.log("available times:", availableTimes);
+  }
+
   function resetStates() {
     setDate(getTodaysDate());
     setTime("");
@@ -50,7 +57,6 @@ export default function BookingForm() {
 
   function formSubmit(e) {
     e.preventDefault();
-    // formIsSubmitted = true;
     setFormIsSubmitted(true);
     bookedInfo.date = date;
     bookedInfo.time = time;
@@ -64,7 +70,6 @@ export default function BookingForm() {
   }
 
   function formChange() {
-    // formIsSubmitted = false;
     setFormIsSubmitted(false);
   }
 
@@ -85,7 +90,7 @@ export default function BookingForm() {
           id="reservation-date"
           className="reservation-field"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
+          onChange={dateChangeHandler}
         />
 
         <hr />
