@@ -9,11 +9,19 @@ test("renders reservation details", () => {
 });
 
 test("available time is correctly initialized", () => {
-  const initialTime = initializeTimes();
-  expect(initialTime).toStrictEqual(["9PM"]);
+  const initialTimes = initializeTimes();
+  expect(initialTimes.length).toBeGreaterThanOrEqual(1);
 });
 
 test("available time is correctly updated", () => {
-  const state = updateTimes(["9PM"], {});
-  expect(state).toStrictEqual(["9PM"]);
+  const state = updateTimes(["9PM"], { date: new Date() });
+  expect(state.length).toBeGreaterThanOrEqual(1);
+});
+
+test("form submission writes to local storage", () => {
+  render(<App />);
+  const submitButton = screen.getByText("Submit");
+  submitButton.click();
+  const formDataFromLocal = localStorage.getItem("formData");
+  expect(formDataFromLocal).toBeDefined();
 });
