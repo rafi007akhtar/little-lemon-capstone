@@ -6,7 +6,7 @@ import BookingForm from "./components/BookingForm";
 import { useReducer } from "react";
 
 function updateTimes(state, action) {
-  switch (action.type) {
+  switch (action?.type) {
   }
   return state;
 }
@@ -28,3 +28,4 @@ function App() {
 }
 
 export default App;
+export { initializeTimes, updateTimes };
