@@ -155,7 +155,9 @@ export default function BookingForm(props) {
           onChange={(e) => setOccasion(e.target.value)}
           required
         />
+
         <hr />
+
         <label htmlFor="resevation-diners" className="row">
           Number of diners
         </label>
@@ -165,8 +167,10 @@ export default function BookingForm(props) {
           <span id="resevation-diners"> {dinerCount} </span>
           <FlatButton onClick={increaseDinerCount}>+</FlatButton>
         </div>
+
         <div className="form-submission">
           <button
+            aria-label="On Click"
             className={`form-submit button ${
               formIsSubmitted ? "submitted" : ""
             }`}
@@ -178,3 +182,5 @@ export default function BookingForm(props) {
     </div>
   );
 }
+
+export { getFormattedDate };
