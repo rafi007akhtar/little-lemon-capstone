@@ -78,7 +78,9 @@ export default function BookingForm(props) {
       "The resevation has been booked with these details:",
       bookedInfo
     );
+    localStorage.setItem("formData", JSON.stringify(bookedInfo));
     resetStates();
+    props.submitForm(bookedInfo);
   }
 
   function formChange() {

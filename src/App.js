@@ -3,8 +3,9 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import BookingForm from "./components/BookingForm";
-import { useReducer } from "react";
-import { fetchAPI } from "./helpers/api";
+import ConfirmedBooking from "./components/ConfirmedBooking";
+import { useReducer, useState } from "react";
+import { fetchAPI, submitAPI } from "./helpers/api";
 
 function updateTimes(state, action) {
   const times = fetchAPI(new Date(action.date));
@@ -17,12 +18,23 @@ function initializeTimes() {
 
 function App() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  function submitForm(formData) {
+    const submission = submitAPI(formData);
+    setSubmitSuccess(submission);
+  }
+
   return (
     <div className="container">
       <Header />
       {/* <Main />
       <Footer /> */}
-      <BookingForm availableTimes={{ availableTimes, dispatch }} />
+      <BookingForm
+        availableTimes={{ availableTimes, dispatch }}
+        submitForm={submitForm}
+      />
+      {submitSuccess && <ConfirmedBooking />}
     </div>
   );
 }
