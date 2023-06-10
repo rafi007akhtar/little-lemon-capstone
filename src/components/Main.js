@@ -30,7 +30,9 @@ export default function Main() {
       <section className="specials-menu">
         <div className="specials-header">
           <h1>This week's specials!</h1>
-          <button className="button">Online Menu</button>
+          <button className="button" onClick={() => nav("/menu")}>
+            Online Menu
+          </button>
         </div>
 
         <div className="menu-items row">

@@ -7,6 +7,7 @@ import ConfirmedBooking from "./components/ConfirmedBooking";
 import { useReducer, useState } from "react";
 import { fetchAPI, submitAPI } from "./helpers/api";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import ErrorPage from "./components/Error";
 
 function updateTimes(state, action) {
   const times = fetchAPI(new Date(action.date));
@@ -30,6 +31,7 @@ function App() {
     {
       path: "/",
       element: <Header />,
+      errorElement: <ErrorPage />,
       children: [
         { index: true, element: <Main /> },
         {
@@ -45,6 +47,9 @@ function App() {
           path: "/booking-confirmed",
           element: <ConfirmedBooking submitSuccess={submitSuccess} />,
         },
+        { path: "/menu", element: <ErrorPage /> },
+        { path: "/order-online", element: <ErrorPage /> },
+        { path: "/login", element: <ErrorPage /> },
       ],
     },
   ]);
