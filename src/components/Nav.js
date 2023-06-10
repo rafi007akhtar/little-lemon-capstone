@@ -8,12 +8,12 @@ const ulStyles = {
 export default function Nav() {
   return (
     <nav>
-      <ul style={ulStyles}>
+      <ul style={ulStyles} className="navbar">
         <li>
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/about">About</NavLink>
+          <a href="#info">About</a>
         </li>
         <li>
           <NavLink to="/menu">Menu</NavLink>
