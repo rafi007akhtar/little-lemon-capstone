@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FlatButton from "./common-components/FlatButton";
+import { useNavigate } from "react-router-dom";
 
 function getFormattedDate(d) {
   const date = new Date(d);
@@ -22,6 +23,8 @@ export default function BookingForm(props) {
   const [dinerCount, setDinerCount] = useState(1);
   const [formIsSubmitted, setFormIsSubmitted] = useState(false);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
@@ -94,6 +97,7 @@ export default function BookingForm(props) {
     } else {
       resetStates();
       setFormIsSubmitted(true);
+      navigate("/booking-confirmed");
     }
   }
 
