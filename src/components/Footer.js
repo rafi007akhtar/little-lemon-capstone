@@ -1,3 +1,7 @@
 export default function Footer() {
-  return <footer></footer>;
+  return (
+    <footer className="karla" style={{ textAlign: "center" }}>
+      &copy; Little Lemon
+    </footer>
+  );
 }
