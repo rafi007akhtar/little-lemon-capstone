@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const cardStyles = {
   height: "431px",
   background: "rgba(217, 217, 217, 0.58)",
@@ -57,7 +59,9 @@ export default function Card(props) {
         <span style={menuItemCostStyles}>${props.itemCost}</span>
       </div>
       <article style={menuDescriptionStyles}>{props.children}</article>
-      <div style={orderDeliveryStyles}>Order a delivery</div>
+      <Link style={orderDeliveryStyles} to="/order-online">
+        Order a delivery
+      </Link>
     </div>
   );
 }

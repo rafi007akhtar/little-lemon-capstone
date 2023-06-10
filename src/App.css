@@ -32,6 +32,18 @@ body,
   border-color: transparent;
 }
 
+.navbar a {
+  text-decoration: none;
+}
+
+.navbar a:visited {
+  color: blue;
+}
+
+.navbar a.active {
+  text-decoration: underline;
+}
+
 .available-times-container {
   max-width: 320px;
 }
@@ -41,10 +53,6 @@ body,
 }
 .available-times:focus {
   background-color: #495e57;
-}
-
-.row {
-  /* width: 100%; */
 }
 
 .header li {
@@ -159,6 +167,7 @@ body,
   line-height: 19px;
   color: #495e57;
   margin-top: 14px;
+  margin-right: 2rem;
 }
 
 .table-booking hr {
@@ -208,12 +217,16 @@ body,
   font-weight: 700;
   font-size: 36px;
   line-height: 44px;
+}
+
+.flat-button {
   text-align: center;
 }
 
 .diner-count {
   margin-top: 20px;
   margin-bottom: 30px;
+  margin-left: 1rem;
 }
 
 .form-submit {
@@ -245,17 +258,19 @@ form {
   }
 }
 
-@media screen and (max-width: 900px) {
-  /* .header img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  } */
-
+@media screen and (max-width: 899px) {
   .header .hamburger {
     margin-left: 20px;
     margin-right: 2rem;
     height: 40px;
+    float: right;
+    font-size: 2rem;
+    color: #333;
+    padding-bottom: 28px;
+  }
+
+  .header img {
+    margin-left: 2rem;
   }
 
   .header ul {
@@ -264,5 +279,73 @@ form {
 
   .header li {
     display: block;
+  }
+
+  .banner .info {
+    width: 100%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  .banner .info h1 {
+    padding-top: 1rem;
+  }
+
+  .banner .info .info-article {
+    margin-right: 2rem;
+  }
+
+  .banner .info button {
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+  }
+
+  .banner .image {
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .banner .image img {
+    object-fit: cover;
+  }
+
+  .specials-menu {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .specials-header h1 {
+    display: block;
+    margin-left: 1rem;
+  }
+
+  .specials-header button {
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .menu-items .col-3 {
+    width: 95%;
+    margin-right: 0;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  .menu-items img {
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .diner-count {
+    text-align: center;
+  }
+
+  .form-submission {
+    text-align: center;
   }
 }
